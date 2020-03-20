@@ -13,7 +13,7 @@ export class WorkoutAudioComponent implements OnInit {
   @ViewChild('nextUpExercise', { static: true }) private nextUpExercise: MyAudioDirective;
   @ViewChild('halfway', { static: true }) private halfway: MyAudioDirective;
   @ViewChild('aboutToComplete', { static: true }) private aboutToComplete: MyAudioDirective;
-  private nextupSound: string;
+  public nextupSound: string;
 
   constructor() { }
 
