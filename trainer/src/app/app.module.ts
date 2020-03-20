@@ -22,7 +22,6 @@ import { WorkoutBuilderModule } from './workout-builder/workout-builder.module';
   imports: [
     BrowserModule,
     WorkoutRunnerModule,
-    WorkoutBuilderModule,
     CoreModule,
     SharedModule,
     AppRoutingModule

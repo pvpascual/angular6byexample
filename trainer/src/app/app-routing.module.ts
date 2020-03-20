@@ -8,6 +8,7 @@ import { WorkoutHistoryComponent } from './workout-history/workout-history.compo
 
 const routes: Routes = [
     { path: 'start', component: StartComponent },
+    { path: 'builder', loadChildren: './workout-builder/workout-builder.module#WorkoutBuilderModule'},
     { path: 'workout', component: WorkoutContainerComponent },
     { path: 'finish', component: FinishComponent },
     { path: 'history', component: WorkoutHistoryComponent },
