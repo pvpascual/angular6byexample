@@ -8,11 +8,11 @@ import { ExerciseProgressEvent, ExerciseChangedEvent } from '../../core/model';
   styles: []
 })
 export class WorkoutAudioComponent implements OnInit {
-  @ViewChild('ticks') private ticks: MyAudioDirective;
-  @ViewChild('nextUp') private nextUp: MyAudioDirective;
-  @ViewChild('nextUpExercise') private nextUpExercise: MyAudioDirective;
-  @ViewChild('halfway') private halfway: MyAudioDirective;
-  @ViewChild('aboutToComplete') private aboutToComplete: MyAudioDirective;
+  @ViewChild('ticks', { static: true }) private ticks: MyAudioDirective;
+  @ViewChild('nextUp', { static: true }) private nextUp: MyAudioDirective;
+  @ViewChild('nextUpExercise', { static: true }) private nextUpExercise: MyAudioDirective;
+  @ViewChild('halfway', { static: true }) private halfway: MyAudioDirective;
+  @ViewChild('aboutToComplete', { static: true }) private aboutToComplete: MyAudioDirective;
   private nextupSound: string;
 
   constructor() { }
