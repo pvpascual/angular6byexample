@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Exercise } from '../../core/model';
-import {WorkoutService} from '../../core/workout-service.service'
+import {WorkoutService} from '../../core/workout.service'
 
 @Component({
   selector: 'abe-exercises',
