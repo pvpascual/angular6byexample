@@ -1,11 +1,17 @@
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { Observable } from 'rxjs/Observable';
+=======
+>>>>>>> checkpoint5.1
 
 import { WorkoutPlan } from '../../core/model';
 import { WorkoutBuilderService } from '../builder-services/workout-builder.service';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> checkpoint5.1
 @Injectable()
 export class WorkoutResolver implements Resolve<WorkoutPlan> {
   public workout: WorkoutPlan;
@@ -32,4 +38,8 @@ export class WorkoutResolver implements Resolve<WorkoutPlan> {
         return null;
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> checkpoint5.1

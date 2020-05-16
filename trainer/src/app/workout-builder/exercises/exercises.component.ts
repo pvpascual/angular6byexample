@@ -1,9 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Exercise } from '../../core/model';
-import {WorkoutService} from '../../core/workout.service'
+import { WorkoutService } from '../../core/workout.service';
 
 @Component({
   selector: 'abe-exercises',
@@ -12,14 +11,19 @@ import {WorkoutService} from '../../core/workout.service'
 })
 export class ExercisesComponent implements OnInit {
   exerciseList: Array<Exercise> = [];
+
   constructor(
       private router: Router,
       private workoutService: WorkoutService) {}
 
   ngOnInit() {
-      this.exerciseList = this.workoutService.getExercises();
+    this.workoutService.getExercises()
+    .subscribe(
+        exercises => this.exerciseList = exercises,
+        (err: any) => console.error
+    );
   }
   onSelect(exercise: Exercise) {
-      this.router.navigate(['./builder/exercise', exercise.name]);
+      // this.router.navigate(['./builder/exercise', exercise.name]);
   }
 }

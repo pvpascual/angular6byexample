@@ -4,7 +4,11 @@ import { WorkoutService } from '../../core/workout.service';
 
 @Injectable()
 export class ExerciseBuilderService {
+<<<<<<< HEAD
     buildingExercise: Exercise;
+=======
+    buildingExercise: any;
+>>>>>>> checkpoint5.1
     newExercise: boolean;
 
     constructor(private workoutService: WorkoutService) {}
@@ -46,4 +50,8 @@ export class ExerciseBuilderService {
     deleteVideo(index: number) {
         if (index >= 0) { this.buildingExercise.videos.splice(index, 1); }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> checkpoint5.1

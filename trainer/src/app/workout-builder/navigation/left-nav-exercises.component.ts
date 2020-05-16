@@ -9,6 +9,7 @@ import { WorkoutBuilderService } from '../builder-services/workout-builder.servi
     templateUrl: './left-nav-exercises.component.html'
 })
 export class LeftNavExercisesComponent implements OnInit {
+<<<<<<< HEAD
     public exerciseList: Array<Exercise> = [];
 
     constructor(private workoutService: WorkoutService,
@@ -23,3 +24,23 @@ export class LeftNavExercisesComponent implements OnInit {
       this.workoutBuilderService.addExercise(new ExercisePlan(exercise, 30)); 
     }
 }
+=======
+    exerciseList: Array<Exercise> = [];
+
+    constructor(
+      public workoutService: WorkoutService,
+      public workoutBuilderService: WorkoutBuilderService) {}
+
+      ngOnInit() {
+        this.workoutService.getExercises()
+        .subscribe(
+            exercises => this.exerciseList = exercises,
+            (err: any) => console.error
+        );
+      }
+
+    addExercise(exercise: Exercise) {
+      this.workoutBuilderService.addExercise(new ExercisePlan(exercise, 30));
+    }
+}
+>>>>>>> checkpoint5.1

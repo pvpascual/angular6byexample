@@ -9,6 +9,7 @@ import { WorkoutResolver } from './workout/workout.resolver';
 import { ExerciseResolver } from './exercise/exercise.resolver';
 
 const routes: Routes = [
+<<<<<<< HEAD
     {
       path: '',
       component: WorkoutBuilderComponent,
@@ -30,3 +31,25 @@ const routes: Routes = [
     exports: [RouterModule]
   })
   export class WorkoutBuilderRoutingModule { }
+=======
+  {
+    path: '',
+    component: WorkoutBuilderComponent,
+    children: [
+         {path: '', pathMatch: 'full', redirectTo: 'workouts'},
+         {path: 'workouts', component: WorkoutsComponent },
+         {path: 'workout/new',  component: WorkoutComponent, resolve: { workout: WorkoutResolver} },
+         {path: 'workout/:id', component: WorkoutComponent, resolve: { workout: WorkoutResolver} },
+         {path: 'exercises', component: ExercisesComponent},
+         {path: 'exercise/new', component: ExerciseComponent, resolve: { exercise: ExerciseResolver} },
+         {path: 'exercise/:id', component: ExerciseComponent, resolve: { exercise: ExerciseResolver} }
+    ]
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class WorkoutBuilderRoutingModule { }
+>>>>>>> checkpoint5.1

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WorkoutRunnerModule } from './workout-runner/workout-runner.module';
@@ -10,8 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { WorkoutHistoryComponent } from './workout-history/workout-history.component';
 import { SharedModule } from './shared/shared.module';
-import { WorkoutBuilderModule } from './workout-builder/workout-builder.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,12 +20,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     WorkoutRunnerModule,
     CoreModule,
     SharedModule,
-    AppRoutingModule,
-     FormsModule,
-  ReactiveFormsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

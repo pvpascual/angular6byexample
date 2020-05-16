@@ -11,12 +11,14 @@ import { SecondsToTimePipe } from './seconds-to-time.pipe';
   ],
   declarations: [
     OrderByPipe,
+    SecondsToTimePipe,
     SearchPipe,
     SecondsToTimePipe,
     MyAudioDirective
   ],
   exports: [
     OrderByPipe,
+    SecondsToTimePipe,
     SearchPipe,
     SecondsToTimePipe,
     MyAudioDirective

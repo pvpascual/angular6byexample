@@ -12,4 +12,8 @@ describe('WorkoutResolverService', () => {
   it('should be created', inject([WorkoutResolver], (service: WorkoutResolver) => {
     expect(service).toBeTruthy();
   }));
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> checkpoint5.1

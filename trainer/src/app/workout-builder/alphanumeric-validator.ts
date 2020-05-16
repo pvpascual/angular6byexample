@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> checkpoint5.1
 import { FormControl } from '@angular/forms';
 
 export class AlphaNumericValidator {
@@ -7,4 +11,8 @@ export class AlphaNumericValidator {
         }
         return null;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> checkpoint5.1

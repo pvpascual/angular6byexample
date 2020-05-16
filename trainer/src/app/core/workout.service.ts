@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import {Injectable} from '@angular/core';
+=======
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
+>>>>>>> checkpoint5.1
 
 import {Exercise, ExercisePlan, WorkoutPlan } from './model';
 import { CoreModule } from './core.module';
@@ -9,6 +16,7 @@ import { CoreModule } from './core.module';
 export class WorkoutService {
     workouts: Array<WorkoutPlan> = [];
     exercises: Array<Exercise> = [];
+<<<<<<< HEAD
 
     constructor() {
         this.setupInitialExercises();
@@ -33,6 +41,38 @@ export class WorkoutService {
           }
       }
       return exercise;
+=======
+    workout: WorkoutPlan;
+    collectionsUrl = 'https://api.mongolab.com/api/1/databases/personaltrainer/collections';
+    apiKey = '9xfTWt1ilKhqIqzV9Z_8jvCzo5ksjexx';
+    params = '?apiKey=' + this.apiKey;
+
+    constructor(public http: HttpClient) {
+    }
+
+    static handleError (error: Response) {
+      console.error(error);
+      return Observable.throw(error || 'Server error');
+    }
+
+    getExercises() {
+        return this.http.get<Exercise[]>(this.collectionsUrl + '/exercises' + this.params)
+            .pipe(catchError(WorkoutService.handleError));
+    }
+
+    getExercise(exerciseName: string) {
+        return this.http.get(this.collectionsUrl + '/exercises/' + exerciseName  + this.params)
+            .pipe(catchError(WorkoutService.handleError));
+    }
+
+    updateExercise(exercise: Exercise) {
+        for (let i = 0; i < this.exercises.length; i++) {
+            if (this.exercises[i].name === exercise.name) {
+                this.exercises[i] = exercise;
+            }
+        }
+        return exercise;
+>>>>>>> checkpoint5.1
     }
 
     addExercise(exercise: Exercise) {
@@ -52,6 +92,7 @@ export class WorkoutService {
         if (exerciseIndex >= 0) { this.exercises.splice(exerciseIndex, 1); }
     }
 
+<<<<<<< HEAD
 
     getWorkouts() {
         return this.workouts;
@@ -68,10 +109,27 @@ export class WorkoutService {
       if (workout.name) {
           this.workouts.push(workout);
           return workout;
+=======
+    getWorkouts() {
+        return this.http.get <WorkoutPlan[]>(this.collectionsUrl + '/workouts' + this.params)
+            .pipe(catchError(WorkoutService.handleError));
+    }
+
+    getWorkout(workoutName: string) {
+        return this.http.get<WorkoutPlan>(this.collectionsUrl + '/workouts/' + workoutName  + this.params)
+            .pipe(catchError(WorkoutService.handleError));
+    }
+
+    addWorkout(workout: WorkoutPlan) {
+        if (workout.name) {
+            this.workouts.push(workout);
+            return workout;
+>>>>>>> checkpoint5.1
         }
     }
 
     updateWorkout(workout: WorkoutPlan) {
+<<<<<<< HEAD
       for (let i = 0; i < this.workouts.length; i++) {
           if (this.workouts[i].name === workout.name) {
               this.workouts[i] = workout;
@@ -259,3 +317,13 @@ export class WorkoutService {
       this.workouts.push(workout);
   }
 }
+=======
+        for (let i = 0; i < this.workouts.length; i++) {
+            if (this.workouts[i].name === workout.name) {
+                this.workouts[i] = workout;
+                break;
+            }
+        }
+    }
+}
+>>>>>>> checkpoint5.1

@@ -5,7 +5,11 @@ import { WorkoutService } from '../../core/workout.service';
 
 @Injectable()
 export class WorkoutBuilderService {
+<<<<<<< HEAD
     buildingWorkout: WorkoutPlan;
+=======
+    buildingWorkout: any;
+>>>>>>> checkpoint5.1
     newWorkout: boolean;
     firstExercise = true;
 
@@ -49,4 +53,8 @@ export class WorkoutBuilderService {
       this.newWorkout = false;
       return workout;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> checkpoint5.1
