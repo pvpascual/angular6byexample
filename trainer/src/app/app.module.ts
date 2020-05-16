@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { WorkoutHistoryComponent } from './workout-history/workout-history.component';
 import { SharedModule } from './shared/shared.module';
 import { WorkoutBuilderModule } from './workout-builder/workout-builder.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { WorkoutBuilderModule } from './workout-builder/workout-builder.module';
     WorkoutRunnerModule,
     CoreModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+     FormsModule,
+  ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

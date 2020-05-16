@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ExercisePlan} from './model';
-import {WorkoutPlan} from './model';
-import {Exercise} from './model';
+
+import {Exercise, ExercisePlan, WorkoutPlan } from './model';
 import { CoreModule } from './core.module';
 
 @Injectable({
@@ -17,18 +16,70 @@ export class WorkoutService {
     }
 
     getExercises() {
-        return this.exercises;
+      return this.exercises;
+  }
+
+    getExercise(exerciseName: string) {
+      for (const exercise of this.exercises) {
+          if (exercise.name === exerciseName) { return exercise; }
+      }
+      return null;
     }
+
+    updateExercise(exercise: Exercise) {
+      for (let i = 0; i < this.exercises.length; i++) {
+          if (this.exercises[i].name === exercise.name) {
+              this.exercises[i] = exercise;
+          }
+      }
+      return exercise;
+    }
+
+    addExercise(exercise: Exercise) {
+        if (exercise.name) {
+            this.exercises.push(exercise);
+            return exercise;
+        }
+    }
+
+    deleteExercise(exerciseName: string) {
+        let exerciseIndex: number;
+        for (let i = 0; i < this.exercises.length; i++) {
+            if (this.exercises[i].name === exerciseName) {
+                exerciseIndex = i;
+            }
+        }
+        if (exerciseIndex >= 0) { this.exercises.splice(exerciseIndex, 1); }
+    }
+
 
     getWorkouts() {
         return this.workouts;
     }
+
     getWorkout(name: string) {
-        for (const workout of this.workouts) {
-            if (workout.name === name) { return workout; }
-        }
+      for (const workout of this.workouts) {
+          if (workout.name === name) { return workout; }
+      }
         return null;
     }
+
+    addWorkout(workout: WorkoutPlan) {
+      if (workout.name) {
+          this.workouts.push(workout);
+          return workout;
+        }
+    }
+
+    updateWorkout(workout: WorkoutPlan) {
+      for (let i = 0; i < this.workouts.length; i++) {
+          if (this.workouts[i].name === workout.name) {
+              this.workouts[i] = workout;
+              break;
+          }
+      }
+  }
+
     setupInitialExercises() {
         this.exercises.push(
             new Exercise(
@@ -200,68 +251,11 @@ export class WorkoutService {
      }
 
     setupInitialWorkouts() {
-        const exercises = this.getExercises();
-        const workout = new WorkoutPlan('7MinWorkout', '7 Minute Workout', 10, []);
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[0],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[1],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[2],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[3],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[4],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[5],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[6],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[7],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[8],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[9],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[10],
-                30)
-        );
-        workout.exercises.push(
-            new ExercisePlan(
-                exercises[11],
-                30)
-        );
-        this.workouts.push(workout);
-    }
+      const exercises = this.getExercises();
+      const workout = new WorkoutPlan('7MinWorkout', '7 Minute Workout', 10, []);
+      for (const exercise of this.exercises) {
+          workout.exercises.push(new ExercisePlan(exercise, 30));
+      }
+      this.workouts.push(workout);
+  }
 }
