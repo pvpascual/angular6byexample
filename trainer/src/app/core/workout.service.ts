@@ -16,20 +16,18 @@ export class WorkoutService {
     workouts: Array<WorkoutPlan> = [];
     exercises: Array<Exercise> = [];
     workout: WorkoutPlan;
-    collectionsUrl = 'https://api.mongolab.com/api/1/databases/personaltrainer/collections';
-    apiKey = '9xfTWt1ilKhqIqzV9Z_8jvCzo5ksjexx';
-    params = '?apiKey=' + this.apiKey;
+    collectionsUrl = 'http://localhost:59099/api';  
 
     constructor(public http: HttpClient) {
     }
 
     getExercises(): Observable<Exercise[]> {
-        return this.http.get<Exercise[]>(this.collectionsUrl + '/exercises' + this.params)
+        return this.http.get<Exercise[]>(this.collectionsUrl + '/exercises')
             .pipe(catchError(this.handleError('getExercises', [])));
     }
 
     getExercise (exerciseName: string): Observable<Exercise> {
-        return this.http.get<Exercise>(this.collectionsUrl + '/exercises/' + exerciseName  + this.params)
+        return this.http.get<Exercise>(this.collectionsUrl + '/exercises/' + exerciseName)
             .pipe(catchError(this.handleError<Exercise>(`getHero id=${exerciseName}`)));
     }
 
@@ -60,7 +58,7 @@ export class WorkoutService {
     }
 
     getWorkouts(): Observable<WorkoutPlan[]> {
-        return this.http.get<WorkoutPlan[]>(this.collectionsUrl + '/workouts' + this.params)
+        return this.http.get<WorkoutPlan[]>(this.collectionsUrl + '/workouts')
             .pipe(
                 map((workouts: Array<any>) => {
                   const result: Array<WorkoutPlan> = [];
@@ -84,8 +82,8 @@ export class WorkoutService {
 
     getWorkout(workoutName: string): Observable<WorkoutPlan> {
       return forkJoin (
-          this.http.get(this.collectionsUrl + '/exercises' + this.params),
-          this.http.get(this.collectionsUrl + '/workouts/' + workoutName + this.params))
+          this.http.get(this.collectionsUrl + '/exercises'),
+          this.http.get(this.collectionsUrl + '/workouts/' + workoutName))
           .pipe(
                map(
                   (data: any) => {
@@ -110,20 +108,57 @@ export class WorkoutService {
       }
 
       addWorkout(workout: WorkoutPlan) {
-          if (workout.name) {
-              this.workouts.push(workout);
-              return workout;
-          }
+          const workoutExercises : any = [];
+          workout.exercises.forEach(
+              (exercisePlan: any) =>{
+                  workoutExercises.push({name: exercisePlan.exercise.name, duration: exercisePlan.duration})
+              }
+          )
+
+          const body = {
+            '_id': workout.name,
+            'exercises': workoutExercises,
+            'name': workout.name,
+            'title': workout.title,
+            'description': workout.description,
+            'restBetweenExercise': workout.restBetweenExercise
+        };
+
+        return this.http.post(this.collectionsUrl + '/workouts', body)
+        .pipe(
+            catchError(this.handleError<WorkoutPlan>())
+        );
       }
 
       updateWorkout(workout: WorkoutPlan) {
-          for (let i = 0; i < this.workouts.length; i++) {
-              if (this.workouts[i].name === workout.name) {
-                  this.workouts[i] = workout;
-                  break;
-              }
-          }
+        const workoutExercises: any = [];
+        workout.exercises.forEach(
+            (exercisePlan: any) => {
+                workoutExercises.push({name: exercisePlan.exercise.name, duration: exercisePlan.duration});
+            }
+        );
+  
+        const body = {
+            '_id': workout.name,
+            'exercises': workoutExercises,
+            'name': workout.name,
+            'title': workout.title,
+            'description': workout.description,
+            'restBetweenExercise': workout.restBetweenExercise
+        };
+  
+        return this.http.put(this.collectionsUrl + '/workouts/' + workout.name, body)
+          .pipe(
+            catchError(this.handleError<WorkoutPlan>())
+          );
       }
+
+      deleteWorkout(workoutName: string) {
+        return this.http.delete(this.collectionsUrl + '/workouts/' + workoutName)
+          .pipe(
+            catchError(this.handleError<WorkoutPlan>())
+          );
+    }
 
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: HttpErrorResponse): Observable<T> => {

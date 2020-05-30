@@ -27,3 +27,4 @@ export class LeftNavExercisesComponent implements OnInit {
       this.workoutBuilderService.addExercise(new ExercisePlan(exercise, 30));
     }
 }
+

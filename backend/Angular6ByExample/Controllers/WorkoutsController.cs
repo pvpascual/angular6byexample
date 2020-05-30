@@ -11,11 +11,11 @@ namespace Angular6ByExample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkoutPlanController : ControllerBase
+    public class WorkoutsController : ControllerBase
     {
         private readonly WorkoutPlanContext _context;
 
-        public WorkoutPlanController(WorkoutPlanContext context)
+        public WorkoutsController(WorkoutPlanContext context)
         {
             _context = context;
         }
